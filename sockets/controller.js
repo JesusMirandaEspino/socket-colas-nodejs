@@ -5,18 +5,16 @@ const ticketcontrol = new TicketControl();
 
 const socketController = (socket) => {
     
-    
-
     socket.on('disconnect', () => {
         
     });
 
-    socket.on('enviar-mensaje', ( payload, callback ) => {
+    socket.on('siguiente-ticket', ( payload, callback ) => {
         
-        const id = 123456789;
-        callback( id );
+        const siguiente = ticketcontrol.siguiente();
+        callback( siguiente );
 
-        socket.broadcast.emit('enviar-mensaje', payload );
+        //Hay un nuevo ticket pendiente
 
     })
 
