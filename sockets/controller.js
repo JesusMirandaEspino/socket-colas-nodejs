@@ -4,10 +4,8 @@ const { TicketControl } = require('../models/ticket-control');
 const ticketcontrol = new TicketControl();
 
 const socketController = (socket) => {
-    
-    socket.on('disconnect', () => {
-        
-    });
+
+    socket.emit( 'ultimo-ticket',  ticketcontrol.ultimo );
 
     socket.on('siguiente-ticket', ( payload, callback ) => {
         
