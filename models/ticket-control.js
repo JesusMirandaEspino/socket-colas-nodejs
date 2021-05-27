@@ -1,6 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 
+
+class Ticket {
+    constructor( numero, escritorio ){
+        this.numero = numero;
+        this.escritorio = escritorio;
+    }
+}
+
 class TicketControl {
 
 
@@ -40,9 +48,20 @@ class TicketControl {
         fs.writeFileSync( dbPath, JSON.stringify( this.toJson ) );
     }
 
+    siguiente(){
+        this.ultimo += 1;
+        const ticket = new Ticket( this.ultimo, null );
+        this.tickets.push( ticket );
+
+        this.guardarDB();
+        return 'Ticket ' + ticket.numero;
+
+    }
+
 }
 
 
 module.exports = {
-    TicketControl
+    TicketControl,
+    Ticket
 }
