@@ -58,6 +58,31 @@ class TicketControl {
 
     }
 
+    atenderTicket( escritorio ){
+
+        //No tenemos tickets
+
+        if( this.tickets.length === 0 ){
+            return null;
+        }
+
+        const ticket = this.tickets.shift();
+        ticket.escritorio = escritorio;
+
+        this.ultimos4.unshift( ticket );
+
+        if( this.ultimos4 > 4 ){
+            this.ultimos4.splice( -1, 1 );
+        }
+
+        console.log( this.ultimos4 );
+
+        this.guardarDB();
+
+        return ticket;
+
+    }
+
 }
 
 
