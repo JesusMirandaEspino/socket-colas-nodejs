@@ -28,7 +28,7 @@ const socketController = (socket) => {
 
         const ticket = ticketcontrol.atenderTicket( escritorio );
 
-        socket.emit( 'estado-actual',  ticketcontrol.ultimos4 );
+        socket.broadcast.emit( 'estado-actual',  ticketcontrol.ultimos4 );
 
         if( !ticket ){
             callback({
