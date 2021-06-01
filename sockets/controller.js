@@ -7,11 +7,15 @@ const socketController = (socket) => {
 
     socket.emit( 'ultimo-ticket',  ticketcontrol.ultimo );
     socket.emit( 'estado-actual',  ticketcontrol.ultimos4 );
+    socket.emit( 'ticket-pendientes',  ticketcontrol.tickets.length );
+
+
 
     socket.on('siguiente-ticket', ( payload, callback ) => {
         
         const siguiente = ticketcontrol.siguiente();
         callback( siguiente );
+        socket.broadcast.emit( 'ticket-pendientes',  ticketcontrol.tickets.length );
 
         //Hay un nuevo ticket pendiente
 
@@ -29,6 +33,8 @@ const socketController = (socket) => {
         const ticket = ticketcontrol.atenderTicket( escritorio );
 
         socket.broadcast.emit( 'estado-actual',  ticketcontrol.ultimos4 );
+        socket.emit( 'ticket-pendientes',  ticketcontrol.tickets.length );
+        socket.broadcast.emit( 'ticket-pendientes',  ticketcontrol.tickets.length );
 
         if( !ticket ){
             callback({
