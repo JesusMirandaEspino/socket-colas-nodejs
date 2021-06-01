@@ -41,7 +41,7 @@ socket.on( 'ticket-pendientes', (pendientes) => {
         lblPendientes.style.display ='';
         lblPendientes.innerText = pendientes;
     }
-    lblPendientes.innerText = pendientes;
+    
         
 } );
 
